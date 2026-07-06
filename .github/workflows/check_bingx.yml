@@ -1,0 +1,12 @@
+name: Check BingX Symbols
+on: [push, workflow_dispatch]
+
+jobs:
+  check-symbols:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Python Script
+        run: |
+          python3 -c "import requests; r = requests.get('https://open-api.bingx.com/openApi/swap/v2/quote/symbols'); print([s['symbol'] for s in r.json()['data']['symbols'] if 'XAU' in s['symbol']])"
