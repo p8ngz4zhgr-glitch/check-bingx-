@@ -9,4 +9,5 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Python Script
         run: |
-          python3 -c "import requests; r = requests.get('https://open-api.bingx.com/openApi/swap/v2/quote/symbols'); print([s['symbol'] for s in r.json()['data']['symbols'] if 'XAU' in s['symbol']])"
+          python3 -c "import requests; headers = {'User-Agent': 'Mozilla/5.0'}; r = requests.get('https://open-api.bingx.com/openApi/swap/v2/quote/symbols', headers=headers); print(r.json())"
+
